@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Frijole" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Averia+Libre" rel="stylesheet">    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Hangman Game Punk Rock</title>
+</head>
+<body>
+  <div class="main container">
+    <h1><center><i class="fas fa-headphones"></i>&nbsp;Punk Rock Hangman</center></h1>
+    <h2>Guess the band on the picture to hear the song. Press any key to get started.</h2>
+    <div class="jumbotron">
+        <div class="row">
+          <div class="col">
+            <img id="bandImage" src="">
+            <button onclick="newGame()"><center>Play Another Game</center></button>
+          </div>
+          <div class="col">
+            <h3>Wins</h3>
+            <div class="game" id="wins"></div>
+              <hr>
+            <h3>Current Word<h3>
+            <div class="game" id="word"></div>
+               <hr>
+            <h3>Number of Guesses Remaining</h3>
+            <div class="game" id="guesses"></div>
+               <hr>
+            <h3>Letters already guessed</h3>
+            <div class="game" id="letters"></div>
+          </div>
+        </div><!-- .row -->
+    </div><!-- jumbotron -->
+    
+  </div><!-- main container -->
+
+<script type="text/javascript">
+
+  var bands = ["my chemical romance", "nirvana", "bad religion", "the offspring", "the greenday", "missfits", "new york dolls", "the vandals", "descendents", "blondie"];
+  var bandImages = ["assets/images/my-chemical-romance.jpg",
+                    "assets/images/nirvana.jpg",
+                    "assets/images/bad-religion.jpg",
+                    "assets/images/the-offspring.jpg",
+                    "assets/images/the-green-day.jpg",
+                    "assets/images/misfits.jpg",
+                    "assets/images/new-york-dolls.jpg",
+                    "assets/images/the-vandals.jpg",
+                    "assets/images/descendents.jpg",
+                    "assets/images/blondie.jpg"
+                   ];
+  var guesses;
+  var word;
+  var guessedword;
+  var guess;
+  var numberOfGuesses = document.getElementById("guesses");
+  var lettersGuessed = document.getElementById("letters");
+  var win = document.getElementById("wins");
+  var currentWord = document.getElementById("word");
+  var currentBandImage = document.getElementById("bandImage");
+  var prevGuesses = [];
+  var winsCount = 0;
+  var correct = document.createElement('ul');
+  var gameStart = true;
+  var gameEnd = false;
+
+
+  function replaceAt(original, index, replacement) {
+      return original.substr(0, index) + replacement+ original.substr(index + replacement.length);
+  }
+
+  function newGame() {
+      //document.getElementById("restart").onclick = setup;
+      gameEnd = false;
+      guesses = 20;
+      numberOfGuesses.innerHTML = guesses;
+      bandIndex = Math.floor(Math.random() * bands.length);
+      word = bands[bandIndex];
+      currentBandImage.src = bandImages[bandIndex];
+      guessedword = word.replace(/\w/g,'-');
+      currentWord.innerHTML = guessedword;
+      lettersGuessed.innerHTML = "";
+      prevGuesses = [];
+      win.innerHTML = winsCount;
+
+  }
+
+  document.onkeyup = function(event) {
+     var userGuess = event.key;
+     if (gameStart == true && gameEnd == false) {
+       newGame();
+       gameStart = false;
+     }
+     else if(gameEnd == false && prevGuesses.indexOf(userGuess) == -1) {
+       lettersGuessed.innerHTML += userGuess + ", "; 
+       guesses = guesses - 1;
+       prevGuesses.push(userGuess);
+       numberOfGuesses.innerHTML = guesses;
+       for(i=0; i<word.length; i++){
+        if(word.substr(i,1) == userGuess){
+          guessedword = replaceAt(guessedword,i,userGuess);
+        }
+       }
+       if (guesses === 0) {
+          gameEnd = true;
+       }
+       if(guessedword.match('-') === null){
+        winsCount = winsCount + 1;
+        win.innerHTML = winsCount;
+        gameEnd = true;
+       }
+       currentWord.innerHTML = guessedword;
+     }
+  }
+
+
+
+
+
+       /* for (var i = 0; i < word.length; i++) {
+         correct.setAttribute('id', 'my-word');
+         guess = document.createElement('li');
+         guess.setAttribute('class', 'guess');
+       
+         if (word[i] === "-") {
+          guess.innerHTML = "-";
+          space = 1;
+          } 
+        
+         else {
+          guess.innerHTML = "_";
+        } 
+
+          geussesnew.push(guess);
+          currentWord.appendChild(correct);
+          correct.appendChild(guess);
+        } */
+
+
+   //document.getElementById("lettersGuessed").innerHTML = toCelsius(77); 
+   //document.onkeyup = function(event) {
+   //var userText = document.getElementById("game");
+   //var html = "<p>wins: " + wins + "</p>" +
+</script>
+<!-- <script src="assets/js/game.js"></script>-->
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</body>
+</html>

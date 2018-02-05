@@ -1,17 +1,91 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en-us">
 <head>
-	<meta charset="UTF-8">
-	<title>Hangman Game</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" src="assets/css/style.css">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Frijole" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Hangman Game Punk Rock</title>
 </head>
 <body>
+  <div class="main container">
+    <h1><center><i class="fas fa-music"></i>Hangman</center></h1>
+    <h2>Press any key to get started.</h2>
+    <div class="jumbotron">
+        <div class="row">
+          <div class="col">
+            <div class="hidden"><img src="assets/images/my-chemical-romance.jpg" alt="my chemical romance"></div>
+            <div class="hidden"><img src="assets/images/nirvana.jpg" alt="nirvana"></div>
+            <div class="hidden"><img src="assets/images/bad-religion.jpg" alt="bad religion"></div>
+            <div class="hidden"><img src="assets/images/the-offspring.jpg" alt="the offspring"></div>
+            <div class="hidden"><img src="assets/images/the-green-day.jpg" alt="green day"></div>
+            <div class="hidden"><img src="assets/images/misfits.jpg" alt="misfits"></div>
+            <div class="hidden"><img src="assets/images/new-york-dolls.jpg" alt="new york dolls"></div>
+            <div class="hidden"><img src="assets/images/the-vandals.jpg" alt="the vandals"></div>
+            <div class="hidden"><img src="assets/images/blondie.jpg" alt="blondie"></div>
+            <div class="hidden"><img src="assets/images/descendents.jpg" alt="descendents"></div>
+          </div>
+          <div class="col">
+            <h3>Wins</h3>
+            <div class="game" id="wins"></div>
+              <hr>
+            <h3>Current Word<h3>
+            <div class="game" id="currentWord"></div>
+               <hr>
+            <h3>Number of Guesses Remaining</h3>
+            <div class="game" id="guesses"></div>
+               <hr>
+            <h3>Letters already guessed</h3>
+            <div class="game" id="letters"></div>
+          </div>
+        </div><!-- .row -->
+    </div><!-- jumbotron -->
+    
+  </div><!-- main container -->
+
+<script type="text/javascript">
+
+  var alphabet = "abcdefghijklmnopqrstuvwxyz";
+  var bands = ["mychemicalromance", "nirvana", "badreligion", "theoffspring", "thegreenday", "missfits", "newyorkdolls", "thevandals", "descendents", "blondie"];
+
+  var guesses = 10;
+  var numberOfGuesses = document.getElementById("guesses");
+  var lettersGuessed = document.getElementById("letters");
+  var win = document.getElementById("wins");
+  var winsCount = 0;
+  var gameStart = true;
+  var answerArray;
+
+  window.onload = function(gameStart) {
+     win.innerHTML = "0";
+  }
+
+  function newGame() {
+      //document.getElementById("restart").onclick = setup;
+      guesses = 11; 
+      //lettersGuessed.innerHTML -= userGuess;
+  }
+
+  document.onkeyup = function(event) {
+     var userGuess = event.key;
+     if (gameStart == true) {
+       numberOfGuesses.innerHTML = guesses; 
+       gameStart = false;
+     }
+     else {
+       lettersGuessed.innerHTML += userGuess + ", "; 
+       guesses = guesses - 1;
+       numberOfGuesses.innerHTML = guesses;
 
 
-
-
-<script src="assets/js/game.js"></script>
+       if (guesses === 0) {
+          newGame();
+       }
+     }
+  }
+</script>
+<!-- <script src="assets/js/game.js"></script>-->
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </body>
 </html>

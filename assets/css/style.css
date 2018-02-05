@@ -1,0 +1,107 @@
+*, ::after, ::before {
+	box-sizing:content-box;
+}
+
+body {
+    overflow-x:hidden;
+    color:#fff;
+    background:url("../images/maxresdefault.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Averia Libre', cursive;
+}
+
+.jumbotron {
+	border:1px solid white;
+	padding:3px;
+	overflow:hidden;
+	margin:0 auto;
+}
+
+button {
+	text-align: center;
+	background-color: #ff00a2;
+	color:black;
+	padding:10px 15px;
+	border:0;
+	border-radius: 20px;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin:0 auto 60px;
+	text-align: center;
+	display: block;
+}
+
+button:hover {
+	background-color: #0fcaec;
+}
+
+h1 {
+	color:#ef3bff;
+	font-size:4em;
+	margin:3% 0 0.5% 0;
+    font-family: 'Frijole', cursive;
+    font-size: 4em;
+}
+
+i {
+	font-family: "Font-Awesome";
+    color:#ef3bff !important;
+}
+
+h2 {
+	text-align: center;
+	color:#fff;
+	font-size: 20px;
+	margin-bottom: 40px;
+}
+
+h3 {
+	text-transform: uppercase;
+	font-weight: bold;
+	color:#00f188;
+	text-align: center;
+	font-size: 22px;
+	margin:20px 0;
+}
+
+hr {
+	border-bottom: 2px dotted white;
+}
+
+#my-word {
+    margin: 0;
+    display: block;
+    padding: 0;
+    display: block;
+}
+
+#my-word li {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 1.6em;
+}
+
+.game {
+	color:#fff;
+	font-size:19px;
+	text-align: center;
+}
+
+.row .col:first-child {
+	background-color: black;
+	border-right:1px solid white;
+}
+
+.row .col:nth-child(2) {
+	background-color: #1e1e1e;
+	border-right:1px solid white;
+}
+
+.row:first-child .col img {
+	padding:50px 0;
+    margin:0 auto;
+    display:block;}
