@@ -7,8 +7,14 @@ body {
     color:#fff;
     background:url("../images/maxresdefault.jpg");
     background-size: cover;
-    background-repeat: no-repeat;
+    height:100%;
+    background-repeat: repeat-y;
     font-family: 'Averia Libre', cursive;
+    margin:auto;
+}
+
+#main {
+    margin-top: 10%;
 }
 
 .jumbotron {
@@ -67,6 +73,8 @@ h3 {
 
 hr {
 	border-bottom: 2px dotted white;
+	margin:0;
+	padding:0;
 }
 
 #my-word {
@@ -89,6 +97,11 @@ hr {
 	color:#fff;
 	font-size:19px;
 	text-align: center;
+	margin-bottom: 20px;
+}
+
+.row .col, .row .col-sm-6, .row .col-sm-5 {
+	padding: 0;
 }
 
 .row .col:first-child {
@@ -105,3 +118,7 @@ hr {
 	padding:50px 0;
     margin:0 auto;
     display:block;}
+
+.row .col-sm-6:first-child {
+    border-right: 2px dotted white;
+}

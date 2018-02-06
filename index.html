@@ -2,6 +2,7 @@
 <html lang="en-us">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Frijole" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Averia+Libre" rel="stylesheet">    
@@ -10,7 +11,7 @@
   <title>Hangman Game Punk Rock</title>
 </head>
 <body>
-  <div class="main container">
+  <div id="main" class="main container">
     <h1><center><i class="fas fa-headphones"></i>&nbsp;Punk Rock Hangman</center></h1>
     <h2>Guess the band on the picture to hear the song. Press any key to get started.</h2>
     <div class="jumbotron">
@@ -20,8 +21,16 @@
             <button onclick="newGame()"><center>Play Another Game</center></button>
           </div>
           <div class="col">
-            <h3>Wins</h3>
-            <div class="game" id="wins"></div>
+            <div class="row">
+              <div class="col-sm-6">
+                <h3>Wins</h3>
+                <div class="game" id="wins"></div>
+              </div>
+              <div class="col-sm-5">
+                <h3>Losses</h3>
+                <div class="game" id="losses"></div>
+              </div>
+            </div>
               <hr>
             <h3>Current Word<h3>
             <div class="game" id="word"></div>
@@ -34,117 +43,12 @@
           </div>
         </div><!-- .row -->
     </div><!-- jumbotron -->
-    
+    <!-- <iframe id="music" width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/258954353&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true"></iframe> -->
+    <!-- <audio id="music" src="" loop="loop"></audio> -->
+    <!-- <audio id='music' src='assets/audio/Come-as-you-are.mp3' autoplay></audio> -->
   </div><!-- main container -->
-
-<script type="text/javascript">
-
-  var bands = ["my chemical romance", "nirvana", "bad religion", "the offspring", "the greenday", "missfits", "new york dolls", "the vandals", "descendents", "blondie"];
-  var bandImages = ["assets/images/my-chemical-romance.jpg",
-                    "assets/images/nirvana.jpg",
-                    "assets/images/bad-religion.jpg",
-                    "assets/images/the-offspring.jpg",
-                    "assets/images/the-green-day.jpg",
-                    "assets/images/misfits.jpg",
-                    "assets/images/new-york-dolls.jpg",
-                    "assets/images/the-vandals.jpg",
-                    "assets/images/descendents.jpg",
-                    "assets/images/blondie.jpg"
-                   ];
-  var guesses;
-  var word;
-  var guessedword;
-  var guess;
-  var numberOfGuesses = document.getElementById("guesses");
-  var lettersGuessed = document.getElementById("letters");
-  var win = document.getElementById("wins");
-  var currentWord = document.getElementById("word");
-  var currentBandImage = document.getElementById("bandImage");
-  var prevGuesses = [];
-  var winsCount = 0;
-  var correct = document.createElement('ul');
-  var gameStart = true;
-  var gameEnd = false;
-
-
-  function replaceAt(original, index, replacement) {
-      return original.substr(0, index) + replacement+ original.substr(index + replacement.length);
-  }
-
-  function newGame() {
-      //document.getElementById("restart").onclick = setup;
-      gameEnd = false;
-      guesses = 20;
-      numberOfGuesses.innerHTML = guesses;
-      bandIndex = Math.floor(Math.random() * bands.length);
-      word = bands[bandIndex];
-      currentBandImage.src = bandImages[bandIndex];
-      guessedword = word.replace(/\w/g,'-');
-      currentWord.innerHTML = guessedword;
-      lettersGuessed.innerHTML = "";
-      prevGuesses = [];
-      win.innerHTML = winsCount;
-
-  }
-
-  document.onkeyup = function(event) {
-     var userGuess = event.key;
-     if (gameStart == true && gameEnd == false) {
-       newGame();
-       gameStart = false;
-     }
-     else if(gameEnd == false && prevGuesses.indexOf(userGuess) == -1) {
-       lettersGuessed.innerHTML += userGuess + ", "; 
-       guesses = guesses - 1;
-       prevGuesses.push(userGuess);
-       numberOfGuesses.innerHTML = guesses;
-       for(i=0; i<word.length; i++){
-        if(word.substr(i,1) == userGuess){
-          guessedword = replaceAt(guessedword,i,userGuess);
-        }
-       }
-       if (guesses === 0) {
-          gameEnd = true;
-       }
-       if(guessedword.match('-') === null){
-        winsCount = winsCount + 1;
-        win.innerHTML = winsCount;
-        gameEnd = true;
-       }
-       currentWord.innerHTML = guessedword;
-     }
-  }
-
-
-
-
-
-       /* for (var i = 0; i < word.length; i++) {
-         correct.setAttribute('id', 'my-word');
-         guess = document.createElement('li');
-         guess.setAttribute('class', 'guess');
-       
-         if (word[i] === "-") {
-          guess.innerHTML = "-";
-          space = 1;
-          } 
-        
-         else {
-          guess.innerHTML = "_";
-        } 
-
-          geussesnew.push(guess);
-          currentWord.appendChild(correct);
-          correct.appendChild(guess);
-        } */
-
-
-   //document.getElementById("lettersGuessed").innerHTML = toCelsius(77); 
-   //document.onkeyup = function(event) {
-   //var userText = document.getElementById("game");
-   //var html = "<p>wins: " + wins + "</p>" +
-</script>
-<!-- <script src="assets/js/game.js"></script>-->
+  <div id="music"></div>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<script src="assets/js/game.js"></script>
 </body>
 </html>
